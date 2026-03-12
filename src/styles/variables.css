@@ -1,0 +1,35 @@
+:root {
+  /* Colores por fase */
+  --color-work: #E63946;
+  --color-rest: #2DC653;
+  --color-round-rest: #F4A261;
+  --color-prep: #457B9D;
+
+  /* Fondo y texto */
+  --bg-dark: #1A1A1A;
+  --bg-card: #2A2A2A;
+  --text-light: #F1FAEE;
+  --text-muted: #A8DADC;
+
+  /* Tipografía */
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-size-countdown: clamp(8rem, 20vw, 16rem);
+  --font-size-exercise: clamp(2rem, 5vw, 4rem);
+  --font-size-phase: clamp(1.5rem, 3vw, 2.5rem);
+  --font-size-label: clamp(1rem, 2vw, 1.5rem);
+
+  /* Espaciados */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+
+  /* Bordes y radios */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
