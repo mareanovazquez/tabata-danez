@@ -33,7 +33,7 @@ function ModeSelector({ onSelectMode }) {
       <header className="mode-selector__header">
         <div className="mode-selector__logo">
           <span className="mode-selector__logo-icon">▶</span>
-          <span className="mode-selector__logo-text">TABATA</span>
+          <span className="mode-selector__logo-text">DANEZ</span>
         </div>
         <p className="mode-selector__subtitle">Elegí tu entrenamiento</p>
       </header>

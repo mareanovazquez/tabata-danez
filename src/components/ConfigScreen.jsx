@@ -12,7 +12,7 @@ const CUSTOM_DEFAULTS = {
   rounds: 4,
   workTime: 20,
   restTime: 10,
-  roundRestTime: 60,
+  roundRestTime: 15,
   prepTime: 5,
   exercises: ["", "", "", ""],
 };
