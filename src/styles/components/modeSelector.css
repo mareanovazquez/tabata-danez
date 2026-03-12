@@ -1,0 +1,214 @@
+/* ── Fuente display ─────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&display=swap");
+
+/* ── Contenedor principal ───────────────────────────────────────────────── */
+.mode-selector {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--bg-dark);
+
+    /* Textura sutil de fondo */
+    background-image:
+        radial-gradient(
+            ellipse at 20% 50%,
+            rgba(230, 57, 70, 0.04) 0%,
+            transparent 60%
+        ),
+        radial-gradient(
+            ellipse at 80% 50%,
+            rgba(45, 198, 83, 0.04) 0%,
+            transparent 60%
+        );
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.mode-selector__header {
+    text-align: center;
+    animation: fadeSlideDown 0.5s ease both;
+}
+
+.mode-selector__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.mode-selector__logo-icon {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: var(--color-work);
+    line-height: 1;
+}
+
+.mode-selector__logo-text {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    line-height: 1;
+}
+
+.mode-selector__subtitle {
+    font-family: "Barlow", sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+    color: var(--text-muted);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+/* ── Grid de modos ──────────────────────────────────────────────────────── */
+.mode-selector__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 640px;
+}
+
+/* ── Tarjeta de modo ────────────────────────────────────────────────────── */
+.mode-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.4rem 1.8rem;
+    background-color: var(--bg-card);
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    transition:
+        transform var(--transition-fast),
+        border-color var(--transition-fast),
+        background-color var(--transition-fast);
+
+    /* Entrada animada con stagger */
+    animation: fadeSlideUp 0.45s ease both;
+    animation-delay: var(--delay);
+}
+
+/* Efecto flood desde el borde izquierdo al hacer hover */
+.mode-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--accent) 12%, transparent),
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.mode-card:hover {
+    transform: translateX(4px);
+    background-color: color-mix(in srgb, var(--bg-card) 85%, var(--accent) 15%);
+    border-left-color: var(--accent);
+    border-left-width: 6px;
+}
+
+.mode-card:hover::before {
+    opacity: 1;
+}
+
+.mode-card:active {
+    transform: translateX(2px) scale(0.99);
+}
+
+/* ── Ícono ───────────────────────────────────────────────────────────────── */
+.mode-card__icon {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1;
+    flex-shrink: 0;
+    position: relative; /* sobre el ::before */
+}
+
+/* ── Contenido de texto ──────────────────────────────────────────────────── */
+.mode-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+}
+
+.mode-card__label {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    letter-spacing: 0.03em;
+    color: var(--text-light);
+    line-height: 1.1;
+}
+
+.mode-card__description {
+    font-family: "Barlow", sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+/* ── Flecha ──────────────────────────────────────────────────────────────── */
+.mode-card__arrow {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: var(--accent);
+    opacity: 0.5;
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.mode-card:hover .mode-card__arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* ── Animaciones ─────────────────────────────────────────────────────────── */
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive: pantalla grande / proyector ─────────────────────────────── */
+@media (min-width: 1200px) {
+    .mode-selector__grid {
+        max-width: 780px;
+        gap: 1.2rem;
+    }
+
+    .mode-card {
+        padding: 1.8rem 2.2rem;
+    }
+}
