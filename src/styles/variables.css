@@ -1,4 +1,5 @@
 :root {
+
   /* Colores por fase */
   --color-work: #E63946;
   --color-rest: #2DC653;
@@ -13,6 +14,7 @@
 
   /* Tipografía */
   --font-display: 'Inter', system-ui, sans-serif;
+  --font-text: 'Sora', system-ui, sans-serif;
   --font-size-countdown: clamp(8rem, 20vw, 16rem);
   --font-size-exercise: clamp(2rem, 5vw, 4rem);
   --font-size-phase: clamp(1.5rem, 3vw, 2.5rem);

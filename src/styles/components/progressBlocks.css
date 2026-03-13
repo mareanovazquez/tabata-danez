@@ -1,0 +1,66 @@
+/* ── Contenedor ─────────────────────────────────────────────────────────── */
+.progress-blocks {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+    height: 28px;
+}
+
+/* ── Bloque base ────────────────────────────────────────────────────────── */
+.progress-block {
+    flex: 1;
+    height: 10px;
+    border-radius: 3px;
+    opacity: 0.25;
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast),
+        height var(--transition-fast);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4px;
+}
+
+/* ── Colores por tipo de fase ───────────────────────────────────────────── */
+.block--work {
+    background-color: var(--color-work);
+}
+
+.block--rest {
+    background-color: var(--color-rest);
+}
+
+.block--round-rest {
+    background-color: var(--color-round-rest);
+}
+
+.block--prep {
+    background-color: var(--color-prep);
+}
+
+/* ── Estado: completado ─────────────────────────────────────────────────── */
+.progress-block--completed {
+    opacity: 0.45;
+}
+
+/* ── Estado: activo ─────────────────────────────────────────────────────── */
+.progress-block--active {
+    opacity: 1;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* ── Label de segundos (modo detallado) ─────────────────────────────────── */
+.progress-block__label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+}
