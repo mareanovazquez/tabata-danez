@@ -1,10 +1,23 @@
 # Proyecto Tabata Danez
 
-Este proyecto es una aplicación web moderna construida con React y Vite.
+**Tabata Danez** es una aplicación web moderna de temporizador para entrenamientos de alta intensidad (HIIT), Tabata y Circuitos. Construida con React y Vite, se destaca por no depender de archivos de audio externos, utilizando la **Web Audio API** para generar sonidos sintetizados en tiempo real.
+
+## Características Principales
+
+- **3 Modos de Entrenamiento:**
+  - **Tabata Clásico:** Configuración estándar (20s trabajo / 10s descanso, 8 rondas).
+  - **Tabata Personalizado:** Permite definir rondas, tiempos y una lista de ejercicios específicos.
+  - **Circuito:** Soporte para estaciones, repeticiones por estación y rotaciones.
+- **Audio Sintetizado:** Sistema de sonido ligero sin archivos `.mp3` ni `.wav`; los beeps y señales se generan dinámicamente.
+- **Interfaz Visual Intuitiva:**
+  - Cambios de color según la fase (Preparación, Trabajo, Descanso).
+  - Barra de progreso general y bloques de fases individuales.
+  - Previsualización del "Próximo Ejercicio".
+  - Modo "Limpio" (sin detalles de tiempo) vs Modo "Detallado".
 
 ## Estructura del Proyecto
 
-La estructura de carpetas está organizada para promover la escalabilidad y mantenibilidad del código.
+La arquitectura se basa en custom hooks para separar la lógica del temporizador de la interfaz de usuario.
 
 ```
 /
