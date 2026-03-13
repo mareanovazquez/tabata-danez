@@ -1,5 +1,6 @@
 import { Flame, Settings, CircuitBoard, ArrowRight } from "lucide-react";
 import "../styles/components/modeSelector.css";
+import logo from "../assets/logo.png";
 
 const MODES = [
   {
@@ -33,8 +34,8 @@ function ModeSelector({ onSelectMode }) {
     <div className="mode-selector">
       <header className="mode-selector__header">
         <div className="mode-selector__logo">
-          <span className="mode-selector__logo-icon">▶</span>
-          <span className="mode-selector__logo-text">DANEZ</span>
+          <span className="mode-selector__logo-icon"></span>
+          <div className="mode-selector__logo-img"><img src={logo} alt="logo" /></div>
         </div>
         <p className="mode-selector__subtitle">Elegí tu entrenamiento</p>
       </header>
