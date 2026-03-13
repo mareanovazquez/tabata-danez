@@ -2,6 +2,7 @@ import {
   Minus,
   Plus,
   X,
+  Trash2,
   Volume2,
   VolumeX,
   ChevronLeft,
@@ -114,6 +115,15 @@ function ExerciseList({ items, onChange, label, placeholder }) {
               placeholder={`${placeholder} ${index + 1}`}
               maxLength={40}
             />
+            {item.length > 0 && (
+              <button
+                className="config-exercise-list__clear"
+                onClick={() => updateItem(index, "")}
+                aria-label="Vaciar campo"
+              >
+                <Trash2 size={15} />
+              </button>
+            )}
             {items.length > 1 && (
               <button
                 className="config-exercise-list__remove"
