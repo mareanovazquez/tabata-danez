@@ -1,3 +1,4 @@
+import { Trophy, RotateCcw, Play } from "lucide-react";
 import "../styles/components/completeScreen.css";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -62,7 +63,7 @@ function CompleteScreen({
     <div className="complete-screen">
       {/* Trofeo animado */}
       <div className="complete-screen__trophy" aria-hidden="true">
-        🏆
+        <Trophy size={64} />
       </div>
 
       {/* Título */}
@@ -93,13 +94,13 @@ function CompleteScreen({
           className="complete-screen__btn complete-screen__btn--repeat"
           onClick={onRepeat}
         >
-          ↩ Repetir workout
+          <RotateCcw size={18} /> Repetir workout
         </button>
         <button
           className="complete-screen__btn complete-screen__btn--new"
           onClick={onNewWorkout}
         >
-          ▶ Nuevo workout
+          <Play size={18} /> Nuevo workout
         </button>
       </div>
     </div>

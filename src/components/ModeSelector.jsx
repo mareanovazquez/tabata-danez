@@ -1,3 +1,4 @@
+import { Flame, Settings, CircuitBoard, ArrowRight } from "lucide-react";
 import "../styles/components/modeSelector.css";
 
 const MODES = [
@@ -5,7 +6,7 @@ const MODES = [
     id: "classic",
     label: "Tabata Clásico",
     description: "Un ejercicio · 8 rondas · 20s / 10s",
-    icon: "🔥",
+    icon: Flame,
     accent: "var(--color-work)",
     accentVar: "--accent-classic",
   },
@@ -13,7 +14,7 @@ const MODES = [
     id: "custom",
     label: "Tabata Personalizado",
     description: "Vos elegís rondas, ejercicios y tiempos",
-    icon: "⚙️",
+    icon: Settings,
     accent: "var(--color-rest)",
     accentVar: "--accent-custom",
   },
@@ -21,7 +22,7 @@ const MODES = [
     id: "circuit",
     label: "Circuito",
     description: "Estaciones rotativas · todos juntos",
-    icon: "🔄",
+    icon: CircuitBoard,
     accent: "var(--color-round-rest)",
     accentVar: "--accent-circuit",
   },
@@ -46,12 +47,16 @@ function ModeSelector({ onSelectMode }) {
             style={{ "--accent": mode.accent, "--delay": `${index * 0.08}s` }}
             onClick={() => onSelectMode(mode.id)}
           >
-            <span className="mode-card__icon">{mode.icon}</span>
+            <span className="mode-card__icon">
+              <mode.icon size={28} />
+            </span>
             <div className="mode-card__content">
               <span className="mode-card__label">{mode.label}</span>
               <span className="mode-card__description">{mode.description}</span>
             </div>
-            <span className="mode-card__arrow">→</span>
+            <span className="mode-card__arrow">
+              <ArrowRight size={20} />
+            </span>
           </button>
         ))}
       </div>

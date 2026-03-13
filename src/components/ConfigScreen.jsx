@@ -1,3 +1,4 @@
+import { Minus, Plus, X, Volume2, VolumeX, ChevronLeft, Play } from "lucide-react";
 import { useState } from "react";
 import "../styles/components/configScreen.css";
 
@@ -45,7 +46,7 @@ function NumberInput({
           onClick={() => onChange(Math.max(min, value - 1))}
           aria-label={`Reducir ${label}`}
         >
-          −
+          <Minus size={16} />
         </button>
         <span className="config-field__value">
           {value}
@@ -56,7 +57,7 @@ function NumberInput({
           onClick={() => onChange(Math.min(max, value + 1))}
           aria-label={`Aumentar ${label}`}
         >
-          +
+          <Plus size={16} />
         </button>
       </div>
     </div>
@@ -98,7 +99,7 @@ function ExerciseList({ items, onChange, label, placeholder }) {
                 onClick={() => removeItem(index)}
                 aria-label="Eliminar"
               >
-                ×
+                <X size={16} />
               </button>
             )}
           </div>
@@ -343,19 +344,20 @@ function ConfigFooter({
         onClick={onToggleSound}
         aria-label={soundEnabled ? "Desactivar sonido" : "Activar sonido"}
       >
-        {soundEnabled ? "🔊" : "🔇"} Sonido {soundEnabled ? "ON" : "OFF"}
+        {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />} Sonido{" "}
+        {soundEnabled ? "ON" : "OFF"}
       </button>
 
       <div className="config-footer__actions">
         <button className="config-footer__back" onClick={onBack}>
-          ← Volver
+          <ChevronLeft size={18} /> Volver
         </button>
         <button
           className="config-footer__start"
           onClick={onStart}
           disabled={!isValid}
         >
-          Empezar ▶
+          Empezar <Play size={18} />
         </button>
       </div>
     </div>
