@@ -39,7 +39,7 @@
 
 /* ── Título ──────────────────────────────────────────────────────────────── */
 .complete-screen__title {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.4rem, 6vw, 4.5rem);
     color: var(--text-light);
@@ -51,7 +51,7 @@
 }
 
 .complete-screen__subtitle {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(0.9rem, 1.8vw, 1.2rem);
     color: var(--text-muted);
     letter-spacing: 0.1em;
@@ -70,7 +70,7 @@
 }
 
 .complete-screen__time-label {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(0.7rem, 1.3vw, 0.9rem);
     color: var(--text-muted);
     letter-spacing: 0.2em;
@@ -78,7 +78,7 @@
 }
 
 .complete-screen__time-value {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.8rem, 7vw, 5rem);
     color: var(--color-rest);
@@ -102,7 +102,7 @@
 }
 
 .complete-screen__stat-value {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(1.8rem, 4vw, 3rem);
     color: var(--text-light);
@@ -110,7 +110,7 @@
 }
 
 .complete-screen__stat-label {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(0.65rem, 1.2vw, 0.85rem);
     color: var(--text-muted);
     letter-spacing: 0.12em;
@@ -132,7 +132,7 @@
 .complete-screen__btn {
     padding: 0.75rem 1.8rem;
     border-radius: var(--radius-sm);
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1rem, 2vw, 1.2rem);
     letter-spacing: 0.06em;

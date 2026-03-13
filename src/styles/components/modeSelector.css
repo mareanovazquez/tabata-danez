@@ -46,7 +46,7 @@
 }
 
 .mode-selector__logo-text {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(2.8rem, 6vw, 5rem);
     letter-spacing: 0.12em;
@@ -55,7 +55,7 @@
 }
 
 .mode-selector__subtitle {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(0.9rem, 1.8vw, 1.3rem);
     color: var(--text-muted);
@@ -143,7 +143,7 @@
 }
 
 .mode-card__label {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1.4rem, 3vw, 2rem);
     letter-spacing: 0.03em;
@@ -152,7 +152,7 @@
 }
 
 .mode-card__description {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     color: var(--text-muted);

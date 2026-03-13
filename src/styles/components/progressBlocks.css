@@ -56,7 +56,7 @@
 
 /* ── Label de segundos (modo detallado) ─────────────────────────────────── */
 .progress-block__label {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 0.65rem;
     color: rgba(0, 0, 0, 0.7);

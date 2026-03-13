@@ -81,7 +81,7 @@
 
 /* Tiempo transcurrido */
 .timer__elapsed {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: clamp(0.9rem, 1.8vw, 1.2rem);
     color: var(--text-muted);
@@ -91,7 +91,7 @@
 
 /* Badge de fase */
 .timer__phase-badge {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: clamp(1rem, 2.2vw, 1.6rem);
     letter-spacing: 0.2em;
@@ -170,7 +170,7 @@
 
 /* ── Cuenta regresiva ────────────────────────────────────────────────────── */
 .timer__countdown {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 900;
     font-size: var(--font-size-countdown);
     line-height: 0.9;
@@ -215,7 +215,7 @@
 
 /* ── Nombre del ejercicio ────────────────────────────────────────────────── */
 .timer__exercise {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: var(--font-size-exercise);
     color: var(--text-light);
@@ -234,7 +234,7 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(0.9rem, 2vw, 1.3rem);
     color: var(--text-muted);
 }
@@ -262,7 +262,7 @@
 }
 
 .timer__next-label {
-    font-family: "Barlow", sans-serif;
+    font-family: var(--font-display);
     font-weight: 500;
     font-size: clamp(0.7rem, 1.3vw, 0.9rem);
     color: var(--text-muted);
@@ -271,7 +271,7 @@
 }
 
 .timer__next-exercise {
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1rem, 2vw, 1.4rem);
     color: var(--text-light);
@@ -309,7 +309,7 @@
     border: 1.5px solid rgba(255, 255, 255, 0.12);
     border-radius: 100px;
     color: var(--text-light);
-    font-family: "Barlow Condensed", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1rem, 2vw, 1.3rem);
     letter-spacing: 0.08em;
