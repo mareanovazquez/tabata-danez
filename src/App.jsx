@@ -67,7 +67,7 @@ function App() {
             schedule={timer.schedule}
             elapsedTime={timer.elapsedTime}
             onNewWorkout={timer.reset}
-            onRepeat={timer.restart}
+            onRepeat={timer.repeatWorkout}
           />
         );
 

@@ -38,6 +38,9 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
   const [totalDuration, setTotalDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  // ─── Config guardada ─────────────────────────────────────────────────────
+  const lastConfigRef = useRef(null);
+
   // ─── Refs ────────────────────────────────────────────────────────────────
   const intervalRef = useRef(null);
   // Guardamos valores actuales en refs para usarlos dentro del intervalo
@@ -174,6 +177,14 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
    */
   const startWorkout = useCallback(
     (config) => {
+      // Persistir config para poder relanzar sin pasar por el formulario
+      lastConfigRef.current = config;
+      try {
+        localStorage.setItem("tabata_last_config", JSON.stringify(config));
+      } catch (_) {
+        // localStorage no disponible — no es crítico
+      }
+
       let sched;
       try {
         sched = buildSchedule(config);
@@ -254,6 +265,22 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
   }, [clearTimer]);
 
   /**
+   * Relanza el último workout directamente, sin pasar por el formulario.
+   * Usa la config guardada en memoria (o recupera desde localStorage como fallback).
+   */
+  const repeatWorkout = useCallback(() => {
+    let config = lastConfigRef.current;
+    if (!config) {
+      try {
+        const saved = localStorage.getItem("tabata_last_config");
+        if (saved) config = JSON.parse(saved);
+      } catch (_) {}
+    }
+    if (!config) return; // no hay config guardada, no hace nada
+    startWorkout(config);
+  }, [startWorkout]);
+
+  /**
    * Vuelve completamente al inicio (selección de modo).
    */
   const reset = useCallback(() => {
@@ -299,6 +326,7 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
     resume,
     togglePause,
     restart,
+    repeatWorkout,
     reset,
 
     // Estado del timer

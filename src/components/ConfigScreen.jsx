@@ -1,6 +1,27 @@
-import { Minus, Plus, X, Volume2, VolumeX, ChevronLeft, Play } from "lucide-react";
+import {
+  Minus,
+  Plus,
+  X,
+  Volume2,
+  VolumeX,
+  ChevronLeft,
+  Play,
+} from "lucide-react";
 import { useState } from "react";
 import "../styles/components/configScreen.css";
+
+// ─── Leer config guardada en localStorage ────────────────────────────────────
+
+function getSavedConfig(mode) {
+  try {
+    const raw = localStorage.getItem("tabata_last_config");
+    if (!raw) return null;
+    const saved = JSON.parse(raw);
+    return saved?.mode === mode ? saved : null;
+  } catch (_) {
+    return null;
+  }
+}
 
 // ─── Defaults por modo ────────────────────────────────────────────────────────
 
@@ -115,7 +136,12 @@ function ExerciseList({ items, onChange, label, placeholder }) {
 // ─── Formulario: Tabata Clásico ───────────────────────────────────────────────
 
 function ClassicForm({ onStart, onBack, soundEnabled, onToggleSound }) {
-  const [form, setForm] = useState(CLASSIC_DEFAULTS);
+  const [form, setForm] = useState(() => {
+    const saved = getSavedConfig("classic");
+    return saved
+      ? { exercise: saved.exercise ?? "", prepTime: saved.prepTime ?? 5 }
+      : CLASSIC_DEFAULTS;
+  });
 
   const isValid = form.exercise.trim().length > 0;
 
@@ -171,7 +197,22 @@ function ClassicForm({ onStart, onBack, soundEnabled, onToggleSound }) {
 // ─── Formulario: Tabata Personalizado ────────────────────────────────────────
 
 function CustomForm({ onStart, onBack, soundEnabled, onToggleSound }) {
-  const [form, setForm] = useState(CUSTOM_DEFAULTS);
+  const [form, setForm] = useState(() => {
+    const saved = getSavedConfig("custom");
+    return saved
+      ? {
+          rounds: saved.rounds ?? CUSTOM_DEFAULTS.rounds,
+          workTime: saved.workTime ?? CUSTOM_DEFAULTS.workTime,
+          restTime: saved.restTime ?? CUSTOM_DEFAULTS.restTime,
+          roundRestTime: saved.roundRestTime ?? CUSTOM_DEFAULTS.roundRestTime,
+          prepTime: saved.prepTime ?? CUSTOM_DEFAULTS.prepTime,
+          exercises:
+            saved.exercises?.length > 0
+              ? saved.exercises
+              : CUSTOM_DEFAULTS.exercises,
+        }
+      : CUSTOM_DEFAULTS;
+  });
 
   const filledExercises = form.exercises.filter((e) => e.trim().length > 0);
   const isValid = filledExercises.length > 0;
@@ -251,7 +292,24 @@ function CustomForm({ onStart, onBack, soundEnabled, onToggleSound }) {
 // ─── Formulario: Circuito ─────────────────────────────────────────────────────
 
 function CircuitForm({ onStart, onBack, soundEnabled, onToggleSound }) {
-  const [form, setForm] = useState(CIRCUIT_DEFAULTS);
+  const [form, setForm] = useState(() => {
+    const saved = getSavedConfig("circuit");
+    return saved
+      ? {
+          repsPerStation:
+            saved.repsPerStation ?? CIRCUIT_DEFAULTS.repsPerStation,
+          workTime: saved.workTime ?? CIRCUIT_DEFAULTS.workTime,
+          restTime: saved.restTime ?? CIRCUIT_DEFAULTS.restTime,
+          stationRestTime:
+            saved.stationRestTime ?? CIRCUIT_DEFAULTS.stationRestTime,
+          prepTime: saved.prepTime ?? CIRCUIT_DEFAULTS.prepTime,
+          stations:
+            saved.stations?.length > 0
+              ? saved.stations
+              : CIRCUIT_DEFAULTS.stations,
+        }
+      : CIRCUIT_DEFAULTS;
+  });
 
   const filledStations = form.stations.filter((s) => s.trim().length > 0);
   const isValid = filledStations.length > 0;
