@@ -25,13 +25,12 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
 ├── src/
 │   ├── assets/
 │   ├── components/
-│   │   ├── common/
-│   │   └── layout/
 │   ├── hooks/
-│   ├── pages/
-│   ├── services/
+│   ├── styles/
 │   ├── utils/
 │   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
 │   └── main.jsx
 ├── .gitignore
 ├── index.html
@@ -40,14 +39,23 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
 └── vite.config.js
 ```
 
-- **`public/`**: Recursos estáticos que no se compilan.
+- **`public/`**: Recursos estáticos que no se compilan (favicon).
 - **`src/`**: Código fuente de la aplicación.
-  - **`assets/`**: Archivos como CSS, imágenes y fuentes.
-  - **`components/`**: Componentes de React reutilizables.
-  - **`hooks/`**: Custom Hooks para la lógica reutilizable.
-  - **`pages/`**: Componentes que actúan como páginas.
-  - **`services/`**: Conexiones a APIs y servicios externos.
-  - **`utils/`**: Funciones de utilidad.
+  - **`assets/`**: Recursos como imágenes y logos.
+  - **`components/`**: Componentes de React reutilizables:
+    - `ConfigScreen.jsx` - Pantalla de configuración del entrenamiento
+    - `ModeSelector.jsx` - Selector de modos de entrenamiento
+    - `TimerScreen.jsx` - Pantalla principal del temporizador
+    - `ProgressBlocks.jsx` - Bloques de progreso visual
+    - `CompleteScreen.jsx` - Pantalla de finalización
+  - **`hooks/`**: Custom Hooks para la lógica reutilizable:
+    - `useAudio.js` - Sistema de audio sintetizado con Web Audio API
+    - `useTabataTimer.js` - Lógica del temporizador Tabata
+  - **`styles/`**: Estilos de la aplicación:
+    - `global.css` - Estilos globales
+    - `variables.css` - Variables CSS
+    - `components/` - Estilos de componentes (un archivo por componente)
+  - **`utils/`**: Funciones de utilidad (`buildSchedule.js` para generar el schedule de ejercicios).
 
 ## Scripts Disponibles
 
@@ -72,5 +80,7 @@ Sirve la versión de producción de forma local para previsualizarla.
 
 ## Tecnologías Utilizadas
 
-- React
-- Vite
+- **React 19** - Biblioteca de UI
+- **Vite 7** - Build tool y dev server
+- **Lucide React** - Íconos modernos y ligeros
+- **Web Audio API** - Generación de audio sintetizado en tiempo real
