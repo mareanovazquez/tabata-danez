@@ -142,12 +142,14 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
       timeRemainingRef.current = newTimeRemaining;
       setTimeRemaining(newTimeRemaining);
 
-      // Callback de countdown: en fases de descanso, cuando quedan 3, 2, 1 segundos
+      // Callback de countdown: en fases de descanso y trabajo, cuando quedan 3 segundos
       const currentPhase = scheduleRef.current[currentPhaseIndexRef.current];
       const isRestPhase = ["rest", "roundRest", "stationRest"].includes(
         currentPhase?.phase,
       );
-      if (isRestPhase && newTimeRemaining <= 3) {
+      const isWorkPhase = currentPhase?.phase === "work";
+      const isPrepPhase = currentPhase?.phase === "prep";
+      if ((isRestPhase || isWorkPhase || isPrepPhase) && newTimeRemaining === 3) {
         onCountdownRef.current?.();
       }
     }
