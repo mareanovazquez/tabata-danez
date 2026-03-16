@@ -1,6 +1,6 @@
 # Proyecto Tabata Danez
 
-**Tabata Danez** es una aplicación web moderna de temporizador para entrenamientos de alta intensidad (HIIT), Tabata y Circuitos. Construida con React y Vite, se destaca por no depender de archivos de audio externos, utilizando la **Web Audio API** para generar sonidos sintetizados en tiempo real.
+**Tabata Danez** es una aplicación web moderna de temporizador para entrenamientos de alta intensidad (HIIT), Tabata y Circuitos. Construida con React y Vite, utiliza **archivos de audio MP3** de alta calidad para las señales sonoras durante el entrenamiento.
 
 ## Características Principales
 
@@ -8,7 +8,10 @@
   - **Tabata Clásico:** Configuración estándar (20s trabajo / 10s descanso, 8 rondas).
   - **Tabata Personalizado:** Permite definir rondas, tiempos y una lista de ejercicios específicos.
   - **Circuito:** Soporte para estaciones, repeticiones por estación y rotaciones.
-- **Audio Sintetizado:** Sistema de sonido ligero sin archivos `.mp3` ni `.wav`; los beeps y señales se generan dinámicamente.
+- **Sistema de Audio MP3:** Señales sonoras claras y distintivas:
+  - `countdown.mp3` - Beep de cuenta regresiva (3, 2, 1)
+  - `work-start.mp3` - Señal de inicio de trabajo
+  - `workout-end.mp3` - Señal de finalización del entrenamiento
 - **Interfaz Visual Intuitiva:**
   - Cambios de color según la fase (Preparación, Trabajo, Descanso).
   - Barra de progreso general y bloques de fases individuales.
@@ -22,8 +25,18 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
 ```
 /
 ├── public/
+│   ├── sounds/
+│   │   ├── countdown.mp3       # Beep cuenta regresiva
+│   │   ├── work-start.mp3      # Inicio de trabajo
+│   │   └── workout-end.mp3     # Fin del entrenamiento
+│   ├── icons/
+│   │   ├── icon-192.png        # Ícono PWA 192x192
+│   │   ├── icon-512.png        # Ícono PWA 512x512
+│   │   └── icon-maskable-512.png
+│   └── favicon.png
 ├── src/
 │   ├── assets/
+│   │   └── logo.png
 │   ├── components/
 │   ├── hooks/
 │   ├── styles/
@@ -32,6 +45,7 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
 │   ├── App.css
 │   ├── index.css
 │   └── main.jsx
+├── .htaccess                    # Config para SPA en Apache
 ├── .gitignore
 ├── index.html
 ├── package.json
@@ -39,7 +53,10 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
 └── vite.config.js
 ```
 
-- **`public/`**: Recursos estáticos que no se compilan (favicon).
+- **`public/`**: Recursos estáticos que no se compilan:
+  - **`sounds/`**: Archivos de audio MP3 para las señales del timer.
+  - **`icons/`**: Íconos para PWA y manifest.
+  - `favicon.png`: Favicon de la aplicación.
 - **`src/`**: Código fuente de la aplicación.
   - **`assets/`**: Recursos como imágenes y logos.
   - **`components/`**: Componentes de React reutilizables:
@@ -49,7 +66,7 @@ La arquitectura se basa en custom hooks para separar la lógica del temporizador
     - `ProgressBlocks.jsx` - Bloques de progreso visual
     - `CompleteScreen.jsx` - Pantalla de finalización
   - **`hooks/`**: Custom Hooks para la lógica reutilizable:
-    - `useAudio.js` - Sistema de audio sintetizado con Web Audio API
+    - `useAudio.js` - Gestión y reproducción de archivos MP3
     - `useTabataTimer.js` - Lógica del temporizador Tabata
   - **`styles/`**: Estilos de la aplicación:
     - `global.css` - Estilos globales
@@ -83,4 +100,4 @@ Sirve la versión de producción de forma local para previsualizarla.
 - **React 19** - Biblioteca de UI
 - **Vite 7** - Build tool y dev server
 - **Lucide React** - Íconos modernos y ligeros
-- **Web Audio API** - Generación de audio sintetizado en tiempo real
+- **HTML5 Audio** - Reproducción de archivos MP3 para señales sonoras
