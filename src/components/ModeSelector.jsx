@@ -35,7 +35,9 @@ function ModeSelector({ onSelectMode }) {
       <header className="mode-selector__header">
         <div className="mode-selector__logo">
           <span className="mode-selector__logo-icon"></span>
-          <div className="mode-selector__logo-img"><img src={logo} alt="logo" /></div>
+          <div className="mode-selector__logo-img">
+            <img src={logo} alt="logo" />
+          </div>
         </div>
         <p className="mode-selector__subtitle">Elegí tu entrenamiento</p>
       </header>
@@ -61,6 +63,17 @@ function ModeSelector({ onSelectMode }) {
           </button>
         ))}
       </div>
+
+      <footer className="mode-selector__credit">
+        Hecho por{" "}
+        <a
+          href="https://marianovazquez.ar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mariano Vazquez
+        </a>
+      </footer>
     </div>
   );
 }
