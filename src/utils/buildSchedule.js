@@ -256,26 +256,36 @@ function buildCustomSchedule(config) {
  * Config esperada:
  * {
  *   mode: 'circuit',
- *   stations: string[],     // nombre de cada estación
+ *   stations: string[],      // nombre de cada estación
+ *   students: string[],      // nombres de los alumnos (puede ser vacío)
  *   repsPerStation: number,
  *   workTime: number,
- *   restTime: number,        // descanso entre reps dentro de la estación
- *   stationRestTime: number, // descanso entre estaciones
+ *   restTime: number,        // descanso entre reps dentro de la rotación
+ *   stationRestTime: number, // descanso entre rotaciones
  *   prepTime: number,        // default 5
  * }
  *
+ * El workout tiene totalStations rotaciones.
+ * En cada rotación R (1-indexed), alumno[i] va a estación[(i + R - 1) % totalStations].
+ * Si hay menos alumnos que estaciones, las posiciones sobrantes tienen studentName = null.
+ *
  * Estructura:
- *   prep
- *   [estación 1]
+ *   prep (con assignments de rotación 1)
+ *   [rotación 1]
  *     work rep1 → rest → work rep2 → rest → ... → work repN
- *   stationRest
- *   [estación 2]
+ *   stationRest (con assignments de rotación 2)
+ *   [rotación 2]
  *     ...
- *   (sin stationRest después de la última estación)
+ *   [rotación totalStations]
+ *     work rep1 → rest → ... → work repN
+ *   (sin stationRest después de la última rotación)
+ *
+ * El stationRest lleva los assignments de la rotación SIGUIENTE.
  */
 function buildCircuitSchedule(config) {
   const {
     stations,
+    students = [],
     repsPerStation,
     workTime,
     restTime,
@@ -284,27 +294,48 @@ function buildCircuitSchedule(config) {
   } = config;
 
   const totalStations = stations.length;
+  const totalRotations = totalStations;
   const phases = [];
 
-  // Prep
+  // Helper: calcula assignments para una rotación dada
+  function getAssignments(rotationNumber) {
+    return stations.map((stationName, stationIndex) => {
+      // alumno[i] → estación[(i + R - 1) % totalStations]
+      // Buscamos qué alumno (si hay) corresponde a esta estación
+      let studentName = null;
+      for (let i = 0; i < students.length; i++) {
+        if ((i + rotationNumber - 1) % totalStations === stationIndex) {
+          studentName = students[i];
+          break;
+        }
+      }
+      return {
+        stationIndex,
+        stationName,
+        studentName,
+      };
+    });
+  }
+
+  // Prep - lleva assignments de la rotación 1
   if (prepTime > 0) {
     phases.push(
       makePhase({
         phase: "prep",
-        exercise: stations[0],
+        exercise: null,
         duration: prepTime,
-        stationNumber: 1,
-        totalStations,
+        rotationNumber: 1,
+        totalRotations,
         repNumber: 1,
         totalReps: repsPerStation,
+        assignments: getAssignments(1),
       }),
     );
   }
 
-  for (let stIdx = 0; stIdx < totalStations; stIdx++) {
-    const exercise = stations[stIdx];
-    const stationNumber = stIdx + 1;
-    const isLastStation = stIdx === totalStations - 1;
+  for (let rotation = 1; rotation <= totalRotations; rotation++) {
+    const isLastRotation = rotation === totalRotations;
+    const currentAssignments = getAssignments(rotation);
 
     for (let rep = 1; rep <= repsPerStation; rep++) {
       const isLastRep = rep === repsPerStation;
@@ -313,42 +344,46 @@ function buildCircuitSchedule(config) {
       phases.push(
         makePhase({
           phase: "work",
-          exercise,
+          exercise: null,
           duration: workTime,
-          stationNumber,
-          totalStations,
+          rotationNumber: rotation,
+          totalRotations,
           repNumber: rep,
           totalReps: repsPerStation,
+          assignments: currentAssignments,
         }),
       );
 
       if (isLastRep) {
-        // Descanso entre estaciones (excepto después de la última)
-        if (!isLastStation && stationRestTime > 0) {
+        // stationRest después de la última rep (excepto en la última rotación)
+        // Lleva los assignments de la SIGUIENTE rotación
+        if (!isLastRotation && stationRestTime > 0) {
           phases.push(
             makePhase({
               phase: "stationRest",
-              exercise,
+              exercise: null,
               duration: stationRestTime,
-              stationNumber,
-              totalStations,
+              rotationNumber: rotation,
+              totalRotations,
               repNumber: rep,
               totalReps: repsPerStation,
+              assignments: getAssignments(rotation + 1),
             }),
           );
         }
       } else {
-        // Descanso entre repeticiones dentro de la estación
+        // rest entre reps dentro de la rotación
         if (restTime > 0) {
           phases.push(
             makePhase({
               phase: "rest",
-              exercise,
+              exercise: null,
               duration: restTime,
-              stationNumber,
-              totalStations,
+              rotationNumber: rotation,
+              totalRotations,
               repNumber: rep,
               totalReps: repsPerStation,
+              assignments: currentAssignments,
             }),
           );
         }
@@ -356,7 +391,7 @@ function buildCircuitSchedule(config) {
     }
   }
 
-  return annotateNextExercise(phases);
+  return phases;
 }
 
 // ─── Entrada principal ────────────────────────────────────────────────────────

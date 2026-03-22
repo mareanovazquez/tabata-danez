@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pause, Play, RotateCcw, LogOut, Eye, EyeOff } from "lucide-react";
 import ProgressBlocks from "./ProgressBlocks";
 import "../styles/components/timerScreen.css";
+import "../styles/components/circuitGrid.css";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -94,6 +95,41 @@ function NextPreview({ phase }) {
   );
 }
 
+// ─── Sub-componente: grilla de circuito ───────────────────────────────────────
+
+const PHASE_CARD_CLASS = {
+  work: "circuit-card--work",
+  rest: "circuit-card--rest",
+  roundRest: "circuit-card--rest",
+  prep: "circuit-card--prep",
+  stationRest: "circuit-card--change",
+};
+
+function CircuitGrid({ assignments, phase, timeRemaining }) {
+  const phaseClass = PHASE_CARD_CLASS[phase.phase] ?? "";
+
+  return (
+    <div className="circuit-grid">
+      {assignments.map((item) => (
+        <div
+          key={item.stationIndex}
+          className={`circuit-card ${phaseClass} ${item.studentName === null ? "circuit-card--empty" : ""}`}
+        >
+          <span className="circuit-card__station">{item.stationName}</span>
+          <span className="circuit-card__student">{item.studentName ?? ""}</span>
+        </div>
+      ))}
+
+      {phase.phase === "stationRest" && (
+        <div className="circuit-overlay">
+          <span className="circuit-overlay__label">CAMBIO</span>
+          <span className="circuit-overlay__countdown">{timeRemaining}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 function TimerScreen({
@@ -166,21 +202,31 @@ function TimerScreen({
 
       {/* ── Área central ────────────────────────────────────────────────── */}
       <main className="timer__main">
-        {/* Cuenta regresiva */}
-        <div
-          className={`timer__countdown ${isCountingDown ? "timer__countdown--urgent" : ""}`}
-        >
-          {timeRemaining}
-        </div>
+        {Array.isArray(currentPhase.assignments) ? (
+          <CircuitGrid
+            assignments={currentPhase.assignments}
+            phase={currentPhase}
+            timeRemaining={timeRemaining}
+          />
+        ) : (
+          <>
+            {/* Cuenta regresiva */}
+            <div
+              className={`timer__countdown ${isCountingDown ? "timer__countdown--urgent" : ""}`}
+            >
+              {timeRemaining}
+            </div>
 
-        {/* Nombre del ejercicio */}
-        <div className="timer__exercise">{currentPhase.exercise}</div>
+            {/* Nombre del ejercicio */}
+            <div className="timer__exercise">{currentPhase.exercise}</div>
 
-        {/* Contexto: ronda / estación / rep */}
-        <PhaseContext phase={currentPhase} />
+            {/* Contexto: ronda / estación / rep */}
+            <PhaseContext phase={currentPhase} />
 
-        {/* Preview del próximo ejercicio */}
-        <NextPreview phase={currentPhase} />
+            {/* Preview del próximo ejercicio */}
+            <NextPreview phase={currentPhase} />
+          </>
+        )}
       </main>
 
       {/* ── Botón de pausa ──────────────────────────────────────────────── */}

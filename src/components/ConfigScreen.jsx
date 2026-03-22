@@ -47,6 +47,7 @@ const CIRCUIT_DEFAULTS = {
   stationRestTime: 30,
   prepTime: 5,
   stations: ["", "", "", "", "", ""],
+  students: [],
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -317,18 +318,22 @@ function CircuitForm({ onStart, onBack, soundEnabled, onToggleSound }) {
             saved.stations?.length > 0
               ? saved.stations
               : CIRCUIT_DEFAULTS.stations,
+          students: saved.students ?? CIRCUIT_DEFAULTS.students,
         }
       : CIRCUIT_DEFAULTS;
   });
 
   const filledStations = form.stations.filter((s) => s.trim().length > 0);
-  const isValid = filledStations.length > 0;
+  const filledStudents = form.students.filter((s) => s.trim().length > 0);
+  const tooManyStudents = filledStudents.length > filledStations.length;
+  const isValid = filledStations.length > 0 && !tooManyStudents;
 
   const handleStart = () => {
     if (!isValid) return;
     onStart({
       mode: "circuit",
       stations: filledStations,
+      students: filledStudents,
       repsPerStation: form.repsPerStation,
       workTime: form.workTime,
       restTime: form.restTime,
@@ -385,6 +390,13 @@ function CircuitForm({ onStart, onBack, soundEnabled, onToggleSound }) {
         placeholder="Estación"
       />
 
+      <ExerciseList
+        items={form.students}
+        onChange={(students) => setForm({ ...form, students })}
+        label="Alumnos"
+        placeholder="Alumno"
+      />
+
       <ConfigFooter
         soundEnabled={soundEnabled}
         onToggleSound={onToggleSound}
@@ -392,6 +404,10 @@ function CircuitForm({ onStart, onBack, soundEnabled, onToggleSound }) {
         onStart={handleStart}
         isValid={isValid}
       />
+
+      {tooManyStudents && (
+        <p className="config-form__error">Hay más alumnos que estaciones</p>
+      )}
     </div>
   );
 }
