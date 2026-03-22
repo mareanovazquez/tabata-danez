@@ -1,9 +1,9 @@
-/* ─── Circuit Grid ─────────────────────────────────────────────────────────── */
+/* ─── Circuit Grid ────────────────────────────────────────────────────────── */
 
 .circuit-grid {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(220px, 45%), 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
     padding: 1rem;
     width: 100%;
