@@ -1,106 +1,110 @@
 /* ─── Circuit Grid ─────────────────────────────────────────────────────────── */
 
 .circuit-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(220px, 45%), 2fr));
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
 }
 
 /* ─── Cards ────────────────────────────────────────────────────────────────── */
 
 .circuit-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  transition:
-    background-color var(--transition-normal),
-    opacity var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    transition:
+        background-color var(--transition-normal),
+        opacity var(--transition-normal);
 }
 
 /* Estados de color */
 .circuit-card--work {
-  background-color: color-mix(in srgb, var(--color-work) 20%, transparent);
-  border-color: var(--color-work);
+    background-color: color-mix(in srgb, var(--color-work) 20%, transparent);
+    border-color: var(--color-work);
 }
 
 .circuit-card--rest {
-  background-color: color-mix(in srgb, var(--color-rest) 20%, transparent);
-  border-color: var(--color-rest);
+    background-color: color-mix(in srgb, var(--color-rest) 20%, transparent);
+    border-color: var(--color-rest);
 }
 
 .circuit-card--prep {
-  background-color: color-mix(in srgb, var(--color-prep) 20%, transparent);
-  border-color: var(--color-prep);
+    background-color: color-mix(in srgb, var(--color-prep) 20%, transparent);
+    border-color: var(--color-prep);
 }
 
 .circuit-card--change {
-  background-color: color-mix(in srgb, var(--color-round-rest) 20%, transparent);
-  border-color: var(--color-round-rest);
+    background-color: color-mix(
+        in srgb,
+        var(--color-round-rest) 20%,
+        transparent
+    );
+    border-color: var(--color-round-rest);
 }
 
 .circuit-card--empty {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 
 /* ─── Texto dentro de las cards ────────────────────────────────────────────── */
 
 .circuit-card__station {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
 .circuit-card__student {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1rem, 3vw, 2.2rem);
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
 }
 
 /* ─── Overlay de rotación ──────────────────────────────────────────────────── */
 
 .circuit-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  background: rgba(26, 26, 26, 0.85);
-  border-radius: var(--radius-md);
-  z-index: 10;
-  animation: fadeIn 0.3s ease both;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: rgba(26, 26, 26, 0.85);
+    border-radius: var(--radius-md);
+    z-index: 10;
+    animation: fadeIn 0.3s ease both;
 }
 
 .circuit-overlay__label {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(3rem, 8vw, 6rem);
-  color: var(--color-round-rest);
-  letter-spacing: 0.2em;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--color-round-rest);
+    letter-spacing: 0.2em;
 }
 
 .circuit-overlay__countdown {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2rem, 5vw, 4rem);
-  color: var(--text-light);
-  letter-spacing: -0.02em;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--text-light);
+    letter-spacing: -0.02em;
 }
