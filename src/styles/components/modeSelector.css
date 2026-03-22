@@ -171,10 +171,7 @@
     color: var(--text-light);
     opacity: 0.85;
     letter-spacing: 0.08em;
-    position: absolute;
-    bottom: var(--spacing-sm);
-    left: 0;
-    right: 0;
+    margin-bottom: 5px;
     text-align: center;
 }
 
