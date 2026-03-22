@@ -108,3 +108,15 @@
     color: var(--text-light);
     letter-spacing: -0.02em;
 }
+
+@media (min-width: 600px) {
+    .circuit-grid {
+        height: 80%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .circuit-grid {
+        height: 70%;
+    }
+}
