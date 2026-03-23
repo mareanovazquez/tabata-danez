@@ -109,29 +109,31 @@ function CircuitGrid({ assignments, phase, timeRemaining }) {
   const phaseClass = PHASE_CARD_CLASS[phase.phase] ?? "";
 
   return (
-    <div className="circuit-grid">
+    <>
       {phase.phase !== "stationRest" && (
         <div className="circuit-timer">{timeRemaining}</div>
       )}
-      {assignments.map((item) => (
-        <div
-          key={item.stationIndex}
-          className={`circuit-card ${phaseClass} ${item.studentName === null ? "circuit-card--empty" : ""}`}
-        >
-          <span className="circuit-card__station">{item.stationName}</span>
-          <span className="circuit-card__student">
-            {item.studentName ?? ""}
-          </span>
-        </div>
-      ))}
+      <div className="circuit-grid">
+        {assignments.map((item) => (
+          <div
+            key={item.stationIndex}
+            className={`circuit-card ${phaseClass} ${item.studentName === null ? "circuit-card--empty" : ""}`}
+          >
+            <span className="circuit-card__station">{item.stationName}</span>
+            <span className="circuit-card__student">
+              {item.studentName ?? ""}
+            </span>
+          </div>
+        ))}
 
-      {phase.phase === "stationRest" && (
-        <div className="circuit-overlay">
-          <span className="circuit-overlay__label">CAMBIO</span>
-          <span className="circuit-overlay__countdown">{timeRemaining}</span>
-        </div>
-      )}
-    </div>
+        {phase.phase === "stationRest" && (
+          <div className="circuit-overlay">
+            <span className="circuit-overlay__label">CAMBIO</span>
+            <span className="circuit-overlay__countdown">{timeRemaining}</span>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
