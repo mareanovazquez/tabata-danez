@@ -10,6 +10,18 @@
     height: 100%;
 }
 
+/* ─── Timer badge ──────────────────────────────────────────────────────────── */
+
+.circuit-timer {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2rem, 6vw, 5.5rem);
+    color: var(--text-light);
+    line-height: 1;
+}
+
 /* ─── Cards ────────────────────────────────────────────────────────────────── */
 
 .circuit-card {

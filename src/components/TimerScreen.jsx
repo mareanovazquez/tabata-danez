@@ -110,13 +110,18 @@ function CircuitGrid({ assignments, phase, timeRemaining }) {
 
   return (
     <div className="circuit-grid">
+      {phase.phase !== "stationRest" && (
+        <div className="circuit-timer">{timeRemaining}</div>
+      )}
       {assignments.map((item) => (
         <div
           key={item.stationIndex}
           className={`circuit-card ${phaseClass} ${item.studentName === null ? "circuit-card--empty" : ""}`}
         >
           <span className="circuit-card__station">{item.stationName}</span>
-          <span className="circuit-card__student">{item.studentName ?? ""}</span>
+          <span className="circuit-card__student">
+            {item.studentName ?? ""}
+          </span>
         </div>
       ))}
 
