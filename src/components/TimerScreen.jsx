@@ -171,7 +171,7 @@ function TimerScreen({
             schedule.reduce(
               (acc, p, i) => (i < currentPhaseIndex ? acc + p.duration : acc),
               0,
-            ),
+            ) + (currentPhase.duration - timeRemaining),
           )}
         </div>
 
