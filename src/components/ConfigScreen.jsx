@@ -138,7 +138,7 @@ function ExerciseList({ items, onChange, label, placeholder }) {
         ))}
       </div>
       <button className="config-exercise-list__add" onClick={addItem}>
-        + Agregar {label.toLowerCase().replace("s", "")}
+        + Agregar {label.toLowerCase()}
       </button>
     </div>
   );
