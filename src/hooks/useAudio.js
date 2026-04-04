@@ -8,6 +8,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
  * Archivos requeridos en /public/sounds/:
  *   countdown.mp3   — se reproduce en los últimos 3, 2 y 1 segundos del descanso
  *   work-start.mp3  — se reproduce al iniciar cada intervalo de trabajo
+ *   work-end.mp3    — se reproduce al terminar un intervalo de trabajo (inicio del descanso)
  *   workout-end.mp3 — se reproduce al finalizar el workout completo
  *
  * Uso:
@@ -16,6 +17,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
  *   useTabataTimer({
  *     onCountdown: audio.playCountdown,
  *     onWorkStart: audio.playWorkStart,
+ *     onWorkEnd: audio.playWorkEnd,
  *     onWorkoutEnd: audio.playWorkoutEnd,
  *   })
  */
@@ -25,21 +27,25 @@ function useAudio() {
 
   const countdownRef = useRef(null);
   const workStartRef = useRef(null);
+  const workEndRef = useRef(null);
   const workoutEndRef = useRef(null);
 
   // Crear y pre-cargar los objetos Audio al montar
   useEffect(() => {
     countdownRef.current = new Audio("/sounds/countdown.mp3");
     workStartRef.current = new Audio("/sounds/work-start.mp3");
+    workEndRef.current = new Audio("/sounds/work-end.mp3");
     workoutEndRef.current = new Audio("/sounds/workout-end.mp3");
 
     countdownRef.current.load();
     workStartRef.current.load();
+    workEndRef.current.load();
     workoutEndRef.current.load();
 
     return () => {
       countdownRef.current = null;
       workStartRef.current = null;
+      workEndRef.current = null;
       workoutEndRef.current = null;
     };
   }, []);
@@ -66,6 +72,12 @@ function useAudio() {
     playAudio(workStartRef);
   }, [soundEnabled, playAudio]);
 
+  // Sonido de fin de trabajo: se llama al terminar un intervalo de trabajo e iniciar el descanso
+  const playWorkEnd = useCallback(() => {
+    if (!soundEnabled) return;
+    playAudio(workEndRef);
+  }, [soundEnabled, playAudio]);
+
   // Sonido final: se llama una sola vez al terminar el workout completo
   const playWorkoutEnd = useCallback(() => {
     if (!soundEnabled) return;
@@ -81,7 +93,7 @@ function useAudio() {
    * de autoplay del navegador antes de que arranque el timer.
    */
   const unlock = useCallback(() => {
-    [countdownRef, workStartRef, workoutEndRef].forEach((ref) => {
+    [countdownRef, workStartRef, workEndRef, workoutEndRef].forEach((ref) => {
       if (!ref.current) return;
       ref.current
         .play()
@@ -100,6 +112,7 @@ function useAudio() {
     unlock,
     playCountdown,
     playWorkStart,
+    playWorkEnd,
     playWorkoutEnd,
   };
 }

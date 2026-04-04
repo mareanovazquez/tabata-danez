@@ -14,6 +14,7 @@ function App() {
   const timer = useTabataTimer({
     onCountdown: audio.playCountdown,
     onWorkStart: audio.playWorkStart,
+    onWorkEnd: audio.playWorkEnd,
     onWorkoutEnd: audio.playWorkoutEnd,
   });
 

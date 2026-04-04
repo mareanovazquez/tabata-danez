@@ -13,15 +13,16 @@ import buildSchedule, { getTotalDuration } from "../utils/buildSchedule";
  *   - Pausa / reanudar / reiniciar
  *
  * Uso:
- *   const timer = useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd })
+ *   const timer = useTabataTimer({ onCountdown, onWorkStart, onWorkEnd, onWorkoutEnd })
  *
  * Callbacks de audio (opcionales):
  *   onCountdown()   — llamado cuando timeRemaining === 3, 2, o 1 en fase de descanso
  *   onWorkStart()   — llamado al iniciar una fase 'work'
+ *   onWorkEnd()     — llamado al iniciar una fase 'rest' inmediatamente después de 'work'
  *   onWorkoutEnd()  — llamado cuando el workout termina
  */
 
-function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
+function useTabataTimer({ onCountdown, onWorkStart, onWorkEnd, onWorkoutEnd } = {}) {
   // ─── Estado de navegación ────────────────────────────────────────────────
   const [screen, setScreen] = useState("mode-select");
   // 'mode-select' | 'config' | 'timer' | 'complete'
@@ -67,6 +68,7 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
   // ─── Callbacks de audio en refs (evita stale closures) ──────────────────
   const onCountdownRef = useRef(onCountdown);
   const onWorkStartRef = useRef(onWorkStart);
+  const onWorkEndRef = useRef(onWorkEnd);
   const onWorkoutEndRef = useRef(onWorkoutEnd);
   useEffect(() => {
     onCountdownRef.current = onCountdown;
@@ -74,6 +76,9 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
   useEffect(() => {
     onWorkStartRef.current = onWorkStart;
   }, [onWorkStart]);
+  useEffect(() => {
+    onWorkEndRef.current = onWorkEnd;
+  }, [onWorkEnd]);
   useEffect(() => {
     onWorkoutEndRef.current = onWorkoutEnd;
   }, [onWorkoutEnd]);
@@ -117,6 +122,11 @@ function useTabataTimer({ onCountdown, onWorkStart, onWorkoutEnd } = {}) {
       // Callback de audio al iniciar fase de trabajo
       if (phase.phase === "work") {
         onWorkStartRef.current?.();
+      }
+
+      // Callback de audio al iniciar descanso después de trabajo
+      if (phase.phase === "rest" && index > 0 && s[index - 1].phase === "work") {
+        onWorkEndRef.current?.();
       }
     },
     [clearTimer],
