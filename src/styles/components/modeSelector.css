@@ -31,16 +31,14 @@
     animation: fadeSlideDown 0.5s ease both;
 }
 
-.mode-selector__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mode-selector__logo-img img {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+.mode-selector__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin: 0;
 }
 
 .mode-selector__subtitle {

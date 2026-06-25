@@ -1,6 +1,6 @@
-# Proyecto Tabata Danez
+# Tabata Timer
 
-**Tabata Danez** es una aplicación web PWA de temporizador para entrenamientos de alta intensidad (HIIT), Tabata y Circuitos. Construida con React y Vite, utiliza **archivos de audio MP3** de alta calidad para las señales sonoras durante el entrenamiento.
+**Tabata Timer** es una aplicación web PWA de temporizador para entrenamientos de alta intensidad (HIIT), Tabata y Circuitos. Construida con React y Vite, utiliza **archivos de audio MP3** de alta calidad para las señales sonoras durante el entrenamiento.
 
 ## Características Principales
 

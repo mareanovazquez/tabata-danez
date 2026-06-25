@@ -2,12 +2,12 @@
     /* Colores por fase */
     --color-rest: #e63946;
     --color-work: #2dc653;
-    --color-round-rest: #f4a261;
+    --color-round-rest: #ec6530;
     --color-prep: #457b9d;
 
     /* Fondo y texto */
-    --bg-dark: #1a1a1a;
-    --bg-card: #2a2a2a;
+    --bg-dark: #0a2947;
+    --bg-card: #4382df;
     --text-light: #f1faee;
     --text-muted: #a8dadc;
 
