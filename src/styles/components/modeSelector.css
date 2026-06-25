@@ -99,7 +99,11 @@
 
 .mode-card:hover {
     transform: translateX(4px);
-    background-color: color-mix(in srgb, var(--bg-card) 85%, var(--accent) 15%);
+    background-color: color-mix(
+        in srgb,
+        var(--bg-card) 85%,
+        var(--accent) 100%
+    );
     border-left-color: var(--accent);
     border-left-width: 6px;
 }
